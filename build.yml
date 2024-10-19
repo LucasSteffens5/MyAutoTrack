@@ -1,0 +1,40 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+env:
+    DOTNET_VERSION: "8.x"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    defaults: 
+      run:
+        working-directory: MyAutoTrack
+        
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Restore 
+        run: dotnet restore MyAutoTrack.sln
+
+      - name: Build
+        run: dotnet build MyAutoTrack.sln --no-restore --configuration Release
+
+      - name: Test
+        run: dotnet test MyAutoTrack.sln --no-build --no-restore --configuration Release
+
+      - name: Publish
+        run: dotnet publish MyAutoTrack.sln --no-build --no-restore --configuration Release
