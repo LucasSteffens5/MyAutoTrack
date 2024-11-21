@@ -11,13 +11,35 @@
 
   <ItemGroup>
     <PackageReference Include="coverlet.collector" Version="6.0.0" />
+    <PackageReference Include="FluentAssertions" Version="6.12.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
+    <PackageReference Include="NetArchTest.Rules" Version="1.3.2" />
     <PackageReference Include="xunit" Version="2.5.3" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.5.3" />
   </ItemGroup>
 
   <ItemGroup>
     <Using Include="Xunit" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\API\MyAutoTrack.Api\MyAutoTrack.Api.csproj"/>
+    <ProjectReference Include="..\..\src\Modules\Lifecycle\MyAutoTrack.Modules.Lifecycle.Application\MyAutoTrack.Modules.Lifecycle.Application.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Lifecycle\MyAutoTrack.Modules.Lifecycle.Domain\MyAutoTrack.Modules.Lifecycle.Domain.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Lifecycle\MyAutoTrack.Modules.Lifecycle.Infrastructure\MyAutoTrack.Modules.Lifecycle.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Lifecycle\MyAutoTrack.Modules.Lifecycle.Presentation\MyAutoTrack.Modules.Lifecycle.Presentation.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Maintenance\MyAutoTrack.Modules.Maintenance.Application\MyAutoTrack.Modules.Maintenance.Application.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Maintenance\MyAutoTrack.Modules.Maintenance.Domain\MyAutoTrack.Modules.Maintenance.Domain.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Maintenance\MyAutoTrack.Modules.Maintenance.Infrastructure\MyAutoTrack.Modules.Maintenance.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Maintenance\MyAutoTrack.Modules.Maintenance.Presentation\MyAutoTrack.Modules.Maintenance.Presentation.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Users\MyAutoTrack.Modules.Users.Application\MyAutoTrack.Modules.Users.Application.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Users\MyAutoTrack.Modules.Users.Domain\MyAutoTrack.Modules.Users.Domain.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Users\MyAutoTrack.Modules.Users.Infrastructure\MyAutoTrack.Modules.Users.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Users\MyAutoTrack.Modules.Users.Presentation\MyAutoTrack.Modules.Users.Presentation.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Vehicles\MyAutoTrack.Modules.Vehicles.Application\MyAutoTrack.Modules.Vehicles.Application.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Vehicles\MyAutoTrack.Modules.Vehicles.Domain\MyAutoTrack.Modules.Vehicles.Domain.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Vehicles\MyAutoTrack.Modules.Vehicles.Infrastructure\MyAutoTrack.Modules.Vehicles.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\src\Modules\Vehicles\MyAutoTrack.Modules.Vehicles.Presentation\MyAutoTrack.Modules.Vehicles.Presentation.csproj" />
   </ItemGroup>
 
 </Project>
