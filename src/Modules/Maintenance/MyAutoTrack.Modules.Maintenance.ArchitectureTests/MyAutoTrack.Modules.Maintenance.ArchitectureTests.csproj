@@ -6,4 +6,17 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\..\..\Common\MyAutoTrack.Common.Application\MyAutoTrack.Common.Application.csproj" />
+      <ProjectReference Include="..\MyAutoTrack.Modules.Maintenance.Domain\MyAutoTrack.Modules.Maintenance.Domain.csproj" />
+      <ProjectReference Include="..\MyAutoTrack.Modules.Maintenance.Infrastructure\MyAutoTrack.Modules.Maintenance.Infrastructure.csproj" />
+      <ProjectReference Include="..\MyAutoTrack.Modules.Maintenance.Presentation\MyAutoTrack.Modules.Maintenance.Presentation.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="FluentAssertions" Version="6.12.0" />
+      <PackageReference Include="NetArchTest.Rules" Version="1.3.2" />
+      <PackageReference Include="xunit.extensibility.core" Version="2.7.1" />
+    </ItemGroup>
+
 </Project>
