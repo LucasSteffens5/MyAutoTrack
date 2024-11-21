@@ -2,7 +2,7 @@
 using System.Reflection.Metadata;
 using MyAutoTrack.Modules.Users.Domain;
 using MyAutoTrack.Modules.Users.Infrastructure;
-using Presentation;
+using MyAutoTrack.Modules.Users.Presentation;
 
 namespace MyAutoTrack.Modules.Users.ArchitectureTests.Abstractions;
 
