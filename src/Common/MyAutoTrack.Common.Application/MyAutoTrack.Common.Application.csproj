@@ -21,4 +21,8 @@
     <ProjectReference Include="..\MyAutoTrack.Common.Domain\MyAutoTrack.Common.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="EventBus\" />
+  </ItemGroup>
+
 </Project>
