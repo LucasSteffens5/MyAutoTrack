@@ -8,16 +8,12 @@ on:
     branches:
       - main
 env:
-    DOTNET_VERSION: "8.x"
+  DOTNET_VERSION: "8.x"
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    
-    defaults: 
-      run:
-        working-directory: MyAutoTrack
-        
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -27,7 +23,7 @@ jobs:
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
-      - name: Restore 
+      - name: Restore
         run: dotnet restore MyAutoTrack.sln
 
       - name: Build
