@@ -1,7 +1,7 @@
 using System.Reflection;
 using System.Reflection.Metadata;
 
-namespace Presentation;
+namespace MyAutoTrack.Modules.Users.Presentation;
 
 public class PresentationUsersAssemblyReference
 {
