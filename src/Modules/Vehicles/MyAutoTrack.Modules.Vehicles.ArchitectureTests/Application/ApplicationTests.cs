@@ -1,9 +1,11 @@
-﻿using FluentValidation;
+﻿
+using FluentValidation;
 using MyAutoTrack.Common.Application.Messaging;
-using MyAutoTrack.Modules.Lifecycle.ArchitectureTests.Abstractions;
+using MyAutoTrack.Modules.Vehicles.ArchitectureTests.Abstractions;
 using NetArchTest.Rules;
+using Xunit;
 
-namespace MyAutoTrack.Modules.Lifecycle.ArchitectureTests.Application;
+namespace MyAutoTrack.Modules.Vehicles.ArchitectureTests.Application;
 
 public class ApplicationTests : BaseTest
 {
