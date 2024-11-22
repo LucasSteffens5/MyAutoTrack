@@ -10,13 +10,12 @@ namespace MyAutoTrack.Modules.Users.Infrastructure.Database;
 public sealed class UsersDbContext(DbContextOptions<UsersDbContext> options) : DbContext(options), IUnitOfWork
 {
     internal DbSet<User> Users { get; set; }
-    // Aqui: Adicionar no seu projeto  as coisas de inbox e outbox
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.HasDefaultSchema(Schemas.Users);
 
         modelBuilder.ApplyConfiguration(new OutboxMessageConfiguration()); 
-       
+        
         modelBuilder.ApplyConfiguration(new OutboxMessageConsumerConfiguration());
         modelBuilder.ApplyConfiguration(new InboxMessageConfiguration());
         modelBuilder.ApplyConfiguration(new InboxMessageConsumerConfiguration());
@@ -25,3 +24,4 @@ public sealed class UsersDbContext(DbContextOptions<UsersDbContext> options) : D
         modelBuilder.ApplyConfiguration(new PermissionConfiguration());
     }
 }
+
