@@ -6,4 +6,10 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\..\..\Common\MyAutoTrack.Common.Application\MyAutoTrack.Common.Application.csproj" />
+      <ProjectReference Include="..\MyAutoTrack.Modules.Users.Domain\MyAutoTrack.Modules.Users.Domain.csproj" />
+      <ProjectReference Include="..\MyAutoTrack.Modules.Users.IntegrationEvents\MyAutoTrack.Modules.Users.IntegrationEvents.csproj" />
+    </ItemGroup>
+
 </Project>

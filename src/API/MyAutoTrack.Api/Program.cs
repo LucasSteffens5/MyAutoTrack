@@ -1,44 +1,89 @@
-var builder = WebApplication.CreateBuilder(args);
+using System.Reflection;
+using HealthChecks.UI.Client;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using MyAutoTrack.Api.Extensions;
+using MyAutoTrack.Api.Middleware;
+using MyAutoTrack.Api.OpenTelemetry;
+using MyAutoTrack.Common.Application;
+using MyAutoTrack.Common.Infrastructure;
+using MyAutoTrack.Common.Infrastructure.Configuration;
+using MyAutoTrack.Common.Infrastructure.EventBus;
+using MyAutoTrack.Common.Presentation.Endpoints;
+using MyAutoTrack.Modules.Users.Infrastructure;
+using Serilog;
 
-// Add services to the container.
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
+
+builder.Host.UseSerilog((context, loggerConfig) => loggerConfig.ReadFrom.Configuration(context.Configuration));
+
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+builder.Services.AddProblemDetails();
+
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerDocumentation();
 
-var app = builder.Build();
+Assembly[] moduleApplicationAssemblies =
+[
+    MyAutoTrack.Modules.Users.Application.AssemblyReference.Assembly
+];
 
-// Configure the HTTP request pipeline.
+builder.Services.AddApplication(moduleApplicationAssemblies);
+
+string databaseConnectionString = builder.Configuration.GetConnectionStringOrThrow("Database");
+string redisConnectionString = builder.Configuration.GetConnectionStringOrThrow("Cache");
+var rabbitMqSettings = new RabbitMqSettings(builder.Configuration.GetConnectionStringOrThrow("Queue"));
+
+builder.Services.AddInfrastructure(
+    DiagnosticsConfig.ServiceName,
+    [
+       
+    ],
+    rabbitMqSettings,
+    databaseConnectionString,
+    redisConnectionString);
+
+Uri keyCloakHealthUrl = builder.Configuration.GetKeyCloakHealthUrl();
+
+builder.Services.AddHealthChecks()
+    .AddNpgSql(databaseConnectionString)
+    .AddRedis(redisConnectionString)
+    .AddRabbitMQ(rabbitConnectionString: rabbitMqSettings.Host)
+    .AddKeyCloak(keyCloakHealthUrl);
+
+builder.Configuration.AddModuleConfiguration(["users"]); // Adicionar as configurações dos modulos conforme for desenvolvendo
+
+builder.Services.AddUsersModule(builder.Configuration); // Adicionar os modulos conforme for desenvolvendo
+
+WebApplication app = builder.Build();
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+
+    app.ApplyMigrations();
 }
 
-app.UseHttpsRedirection();
-
-var summaries = new[]
+app.MapHealthChecks("health", new HealthCheckOptions
 {
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
+    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+});
 
-app.MapGet("/weatherforecast", () =>
-{
-    var forecast = Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
-})
-.WithName("GetWeatherForecast")
-.WithOpenApi();
+app.UseLogContextTraceLogging();
+
+app.UseSerilogRequestLogging();
+
+app.UseExceptionHandler();
+
+app.UseAuthentication();
+
+app.UseAuthorization();
+
+app.MapEndpoints();
 
 app.Run();
 
-internal record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
+namespace MyAutoTrack.Api
 {
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
+    public class Program;
 }
