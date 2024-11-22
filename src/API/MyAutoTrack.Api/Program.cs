@@ -50,9 +50,9 @@ builder.Services.AddHealthChecks()
     .AddRabbitMQ(rabbitConnectionString: rabbitMqSettings.Host)
     .AddKeyCloak(keyCloakHealthUrl);
 
-builder.Configuration.AddModuleConfiguration(["users"]); // Adicionar as configurações dos modulos conforme for desenvolvendo
+builder.Configuration.AddModuleConfiguration(["users"]); // TODO: Adicionar as configurações dos modulos conforme for desenvolvendo
 
-builder.Services.AddUsersModule(builder.Configuration); // Adicionar os modulos conforme for desenvolvendo
+builder.Services.AddUsersModule(builder.Configuration); // TODO: Adicionar os modulos conforme for desenvolvendo
 
 WebApplication app = builder.Build();
 
