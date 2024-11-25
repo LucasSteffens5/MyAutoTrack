@@ -16,7 +16,7 @@ internal sealed class PermissionConfiguration : IEntityTypeConfiguration<Permiss
 
         builder.HasData(
             Permission.GetUser,
-            Permission.ModifyUser); // Aqui adicioanr mais permissoes para outros modulos
+            Permission.ModifyUser); // TODO Aqui adicioanr mais permissoes para outros modulos
 
         builder
             .HasMany<Role>()
@@ -30,7 +30,7 @@ internal sealed class PermissionConfiguration : IEntityTypeConfiguration<Permiss
                     CreateRolePermission(Role.Member, Permission.GetUser),
                   
                     // Admin permissions
-                    CreateRolePermission(Role.Administrator, Permission.GetUser), // Aqui adicioanr mais roles para outros modulos
+                    CreateRolePermission(Role.Administrator, Permission.GetUser), //TODO Aqui adicionar mais roles para outros modulos
                     CreateRolePermission(Role.Administrator, Permission.ModifyUser));
             });
     }

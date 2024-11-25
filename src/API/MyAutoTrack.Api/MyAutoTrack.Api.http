@@ -1,6 +1,3 @@
-@MyAutoTrack.Api_HostAddress = http://localhost:5191
-
-GET {{MyAutoTrack.Api_HostAddress}}/weatherforecast/
-Accept: application/json
+@MyAutoTrack.Api_HostAddress = http://localhost:5000
 
 ###

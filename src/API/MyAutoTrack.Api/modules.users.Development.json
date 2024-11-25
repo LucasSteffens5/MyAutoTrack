@@ -12,7 +12,7 @@
       "AdminUrl": "http://myautotrack.identity:8080/admin/realms/myautotrack/",
       "TokenUrl": "http://myautotrack.identity:8080/realms/myautotrack/protocol/openid-connect/token",
       "ConfidentialClientId": "myautotrack-confidential-client",
-      "ConfidentialClientSecret": "PzotcrvZRF9BHCKcUxdKfHWlIPECG49k",
+      "ConfidentialClientSecret": "J9EO27qINQAX6vJ5rUdhBAT4RK3FbQnZ",
       "PublicClientId": "myautotrack-public-client"
     }
   }

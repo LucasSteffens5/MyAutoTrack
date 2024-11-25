@@ -19,6 +19,7 @@ using MyAutoTrack.Modules.Users.Infrastructure.Identity;
 using MyAutoTrack.Modules.Users.Infrastructure.Inbox;
 using MyAutoTrack.Modules.Users.Infrastructure.Outbox;
 using MyAutoTrack.Modules.Users.Infrastructure.Users;
+using MyAutoTrack.Modules.Users.Presentation;
 
 namespace MyAutoTrack.Modules.Users.Infrastructure;
 
@@ -34,7 +35,7 @@ public static class UsersModule
 
         services.AddInfrastructure(configuration);
 
-        services.AddEndpoints(AssemblyReference.Assembly);
+        services.AddEndpoints(PresentationUsersAssemblyReference.Assembly);
 
         return services;
     }

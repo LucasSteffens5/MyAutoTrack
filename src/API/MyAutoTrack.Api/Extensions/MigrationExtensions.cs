@@ -9,7 +9,7 @@ public static class MigrationExtensions
     {
         using IServiceScope scope = app.ApplicationServices.CreateScope();
 
-        ApplyMigration<UsersDbContext>(scope); // Aqui adionar outros db contexts dos modulos a serem desenvolvidos
+        ApplyMigration<UsersDbContext>(scope); // TODO: Aqui adionar outros db contexts dos modulos a serem desenvolvidos
     }
 
     private static void ApplyMigration<TDbContext>(IServiceScope scope)

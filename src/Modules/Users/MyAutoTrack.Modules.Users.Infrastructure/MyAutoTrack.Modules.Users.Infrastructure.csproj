@@ -12,6 +12,7 @@
       <ProjectReference Include="..\..\..\Common\MyAutoTrack.Common.Presentation\MyAutoTrack.Common.Presentation.csproj" />
       <ProjectReference Include="..\MyAutoTrack.Modules.Users.Application\MyAutoTrack.Modules.Users.Application.csproj" />
       <ProjectReference Include="..\MyAutoTrack.Modules.Users.Domain\MyAutoTrack.Modules.Users.Domain.csproj" />
+      <ProjectReference Include="..\MyAutoTrack.Modules.Users.Presentation\MyAutoTrack.Modules.Users.Presentation.csproj" />
     </ItemGroup>
 
     <ItemGroup>
