@@ -14,9 +14,9 @@ public sealed class VehiclesDbContext(DbContextOptions<VehiclesDbContext> option
 {
     internal DbSet<Vehicle> Vehicles { get; set; }
 
-    internal DbSet<Manufacturer> Manufacturers { get; set; }
-
-    internal DbSet<Owner> Owners { get; set; }
+    // internal DbSet<Manufacturer> Manufacturers { get; set; }
+    //
+    // internal DbSet<Owner> Owners { get; set; }
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
