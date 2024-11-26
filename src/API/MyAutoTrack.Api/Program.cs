@@ -10,6 +10,7 @@ using MyAutoTrack.Common.Infrastructure.Configuration;
 using MyAutoTrack.Common.Infrastructure.EventBus;
 using MyAutoTrack.Common.Presentation.Endpoints;
 using MyAutoTrack.Modules.Users.Infrastructure;
+using MyAutoTrack.Modules.Vehicles.Infrastructure;
 using Serilog;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
@@ -50,9 +51,13 @@ builder.Services.AddHealthChecks()
     .AddKeyCloak(keyCloakHealthUrl);
 
 builder.Configuration
-    .AddModuleConfiguration(["users"]); // TODO: Adicionar as configurações dos modulos conforme for desenvolvendo
+    .AddModuleConfiguration([
+        "users", "vehicles"
+    ]); // TODO: Adicionar as configurações dos modulos conforme for desenvolvendo
 
-builder.Services.AddUsersModule(builder.Configuration); // TODO: Adicionar os modulos conforme for desenvolvendo
+builder.Services.AddUsersModule(builder.Configuration);
+
+builder.Services.AddVehiclesModule(builder.Configuration); // TODO: Adicionar os modulos conforme for desenvolvendo
 
 WebApplication app = builder.Build();
 
