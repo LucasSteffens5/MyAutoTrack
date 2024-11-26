@@ -10,6 +10,7 @@ internal sealed class VehicleConfiguration : IEntityTypeConfiguration<Vehicle>
 {
     public void Configure(EntityTypeBuilder<Vehicle> builder)
     {
+        builder.HasKey(t => t.Id);
         builder.HasOne<Manufacturer>().WithMany().HasForeignKey(t => t.ManufacturerId);
         builder.HasOne<Owner>().WithMany().HasForeignKey(t => t.OwnerId);
     }

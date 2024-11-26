@@ -16,7 +16,6 @@ public sealed class Vehicle : Entity
     public long Mileage { get; private set; }
     public string LicensePlate { get; private set; }
     public Guid OwnerId { get; private set; }
-    public Guid CategoryId { get; private set; }
     public Guid ManufacturerId { get; private set; }
     
 }
