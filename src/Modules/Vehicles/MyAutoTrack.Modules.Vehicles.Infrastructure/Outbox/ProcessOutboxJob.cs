@@ -10,11 +10,11 @@ using MyAutoTrack.Common.Application.Messaging;
 using MyAutoTrack.Common.Domain;
 using MyAutoTrack.Common.Infrastructure.Outbox;
 using MyAutoTrack.Common.Infrastructure.Serialization;
-using MyAutoTrack.Modules.Users.Presentation;
+using MyAutoTrack.Modules.Vehicles.Presentation;
 using Newtonsoft.Json;
 using Quartz;
 
-namespace MyAutoTrack.Modules.Users.Infrastructure.Outbox;
+namespace MyAutoTrack.Modules.Vehicles.Infrastructure.Outbox;
 
 [DisallowConcurrentExecution]
 internal sealed class ProcessOutboxJob(
@@ -24,7 +24,7 @@ internal sealed class ProcessOutboxJob(
     IOptions<OutboxOptions> outboxOptions,
     ILogger<ProcessOutboxJob> logger) : IJob
 {
-    private const string ModuleName = "Users";
+    private const string ModuleName = "Vehicles";
 
     public async Task Execute(IJobExecutionContext context)
     {
@@ -50,7 +50,7 @@ internal sealed class ProcessOutboxJob(
                 IEnumerable<IDomainEventHandler> handlers = DomainEventHandlersFactory.GetHandlers(
                     domainEvent.GetType(),
                     scope.ServiceProvider,
-                    PresentationUsersAssemblyReference.Assembly);
+                    PresentationVehiclesAssemblyReference.Assembly);
 
                 foreach (IDomainEventHandler domainEventHandler in handlers)
                 {
@@ -85,7 +85,7 @@ internal sealed class ProcessOutboxJob(
              SELECT
                 id AS {nameof(OutboxMessageResponse.Id)},
                 content AS {nameof(OutboxMessageResponse.Content)}
-             FROM users.outbox_messages
+             FROM vehicles.outbox_messages
              WHERE processed_on_utc IS NULL
              ORDER BY occurred_on_utc
              LIMIT {outboxOptions.Value.BatchSize}
@@ -107,7 +107,7 @@ internal sealed class ProcessOutboxJob(
     {
         const string sql =
             """
-            UPDATE users.outbox_messages
+            UPDATE vehicles.outbox_messages
             SET processed_on_utc = @ProcessedOnUtc,
                 error = @Error
             WHERE id = @Id

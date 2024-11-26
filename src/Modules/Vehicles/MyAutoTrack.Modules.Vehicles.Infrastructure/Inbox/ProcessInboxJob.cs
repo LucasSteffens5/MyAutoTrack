@@ -9,12 +9,11 @@ using MyAutoTrack.Common.Application.Data;
 using MyAutoTrack.Common.Application.EventBus;
 using MyAutoTrack.Common.Infrastructure.Inbox;
 using MyAutoTrack.Common.Infrastructure.Serialization;
-using MyAutoTrack.Modules.Users.Application;
-using MyAutoTrack.Modules.Users.Presentation;
+using MyAutoTrack.Modules.Vehicles.Presentation;
 using Newtonsoft.Json;
 using Quartz;
 
-namespace MyAutoTrack.Modules.Users.Infrastructure.Inbox;
+namespace MyAutoTrack.Modules.Vehicles.Infrastructure.Inbox;
 
 [DisallowConcurrentExecution]
 internal sealed class ProcessInboxJob(
@@ -24,7 +23,7 @@ internal sealed class ProcessInboxJob(
     IOptions<InboxOptions> inboxOptions,
     ILogger<ProcessInboxJob> logger) : IJob
 {
-    private const string ModuleName = "Users";
+    private const string ModuleName = "Vehicles";
 
     public async Task Execute(IJobExecutionContext context)
     {
@@ -50,7 +49,7 @@ internal sealed class ProcessInboxJob(
                 IEnumerable<IIntegrationEventHandler> handlers = IntegrationEventHandlersFactory.GetHandlers(
                     integrationEvent.GetType(),
                     scope.ServiceProvider,
-                    PresentationUsersAssemblyReference.Assembly);
+                    PresentationVehiclesAssemblyReference.Assembly);
 
                 foreach (IIntegrationEventHandler integrationEventHandler in handlers)
                 {
@@ -85,7 +84,7 @@ internal sealed class ProcessInboxJob(
              SELECT
                 id AS {nameof(InboxMessageResponse.Id)},
                 content AS {nameof(InboxMessageResponse.Content)}
-             FROM users.inbox_messages
+             FROM vehicles.inbox_messages
              WHERE processed_on_utc IS NULL
              ORDER BY occurred_on_utc
              LIMIT {inboxOptions.Value.BatchSize}
@@ -107,7 +106,7 @@ internal sealed class ProcessInboxJob(
     {
         const string sql =
             """
-            UPDATE users.inbox_messages
+            UPDATE vehicles.inbox_messages
             SET processed_on_utc = @ProcessedOnUtc,
                 error = @Error
             WHERE id = @Id
