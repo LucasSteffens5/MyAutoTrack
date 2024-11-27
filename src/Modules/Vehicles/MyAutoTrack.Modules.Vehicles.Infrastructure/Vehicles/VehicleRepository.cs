@@ -7,9 +7,8 @@ namespace MyAutoTrack.Modules.Vehicles.Infrastructure.Vehicles;
 internal sealed class VehicleRepository(VehiclesDbContext context) : IVehicleRepository
 {
     public async Task<Vehicle?> GetAsync(Guid id, CancellationToken cancellationToken = default)
-    {
-        return await context.Vehicles.SingleOrDefaultAsync(v => v.Id == id, cancellationToken);
-    }
+        => await context.Vehicles.SingleOrDefaultAsync(v => v.Id == id, cancellationToken);
+
 
     public void Insert(Vehicle vehicle)
     {
