@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MyAutoTrack.Modules.Vehicles.Infrastructure.Database.Migrations
 {
     [DbContext(typeof(VehiclesDbContext))]
-    [Migration("20241126202740_Add_Inbox_and_Outbox")]
-    partial class Add_Inbox_and_Outbox
+    [Migration("20241201174325_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

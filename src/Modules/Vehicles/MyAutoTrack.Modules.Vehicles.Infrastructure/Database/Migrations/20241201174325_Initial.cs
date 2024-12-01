@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace MyAutoTrack.Modules.Vehicles.Infrastructure.Database.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial_Migrations_Vehicles : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -15,20 +15,37 @@ namespace MyAutoTrack.Modules.Vehicles.Infrastructure.Database.Migrations
                 name: "vehicles");
 
             migrationBuilder.CreateTable(
-                name: "manufacturer",
+                name: "inbox_message_consumers",
                 schema: "vehicles",
                 columns: table => new
                 {
-                    id = table.Column<Guid>(type: "uuid", nullable: false),
-                    name = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false)
+                    inbox_message_id = table.Column<Guid>(type: "uuid", nullable: false),
+                    name = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_manufacturer", x => x.id);
+                    table.PrimaryKey("pk_inbox_message_consumers", x => new { x.inbox_message_id, x.name });
                 });
 
             migrationBuilder.CreateTable(
-                name: "owner",
+                name: "inbox_messages",
+                schema: "vehicles",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    type = table.Column<string>(type: "text", nullable: false),
+                    content = table.Column<string>(type: "jsonb", maxLength: 2000, nullable: false),
+                    occurred_on_utc = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    processed_on_utc = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    error = table.Column<string>(type: "text", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_inbox_messages", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "manufacturers",
                 schema: "vehicles",
                 columns: table => new
                 {
@@ -37,7 +54,33 @@ namespace MyAutoTrack.Modules.Vehicles.Infrastructure.Database.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_owner", x => x.id);
+                    table.PrimaryKey("pk_manufacturers", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "outbox_message_consumers",
+                schema: "vehicles",
+                columns: table => new
+                {
+                    outbox_message_id = table.Column<Guid>(type: "uuid", nullable: false),
+                    name = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_outbox_message_consumers", x => new { x.outbox_message_id, x.name });
+                });
+
+            migrationBuilder.CreateTable(
+                name: "owners",
+                schema: "vehicles",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    name = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_owners", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -58,17 +101,17 @@ namespace MyAutoTrack.Modules.Vehicles.Infrastructure.Database.Migrations
                 {
                     table.PrimaryKey("pk_vehicles", x => x.id);
                     table.ForeignKey(
-                        name: "fk_vehicles_manufacturer_manufacturer_id",
+                        name: "fk_vehicles_manufacturers_manufacturer_id",
                         column: x => x.manufacturer_id,
                         principalSchema: "vehicles",
-                        principalTable: "manufacturer",
+                        principalTable: "manufacturers",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "fk_vehicles_owner_owner_id",
+                        name: "fk_vehicles_owners_owner_id",
                         column: x => x.owner_id,
                         principalSchema: "vehicles",
-                        principalTable: "owner",
+                        principalTable: "owners",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -90,15 +133,27 @@ namespace MyAutoTrack.Modules.Vehicles.Infrastructure.Database.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "inbox_message_consumers",
+                schema: "vehicles");
+
+            migrationBuilder.DropTable(
+                name: "inbox_messages",
+                schema: "vehicles");
+
+            migrationBuilder.DropTable(
+                name: "outbox_message_consumers",
+                schema: "vehicles");
+
+            migrationBuilder.DropTable(
                 name: "vehicles",
                 schema: "vehicles");
 
             migrationBuilder.DropTable(
-                name: "manufacturer",
+                name: "manufacturers",
                 schema: "vehicles");
 
             migrationBuilder.DropTable(
-                name: "owner",
+                name: "owners",
                 schema: "vehicles");
         }
     }

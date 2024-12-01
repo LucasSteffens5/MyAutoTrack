@@ -153,6 +153,10 @@ namespace MyAutoTrack.Modules.Users.Infrastructure.Database.Migrations
                         new
                         {
                             Code = "vehicles:update"
+                        },
+                        new
+                        {
+                            Code = "vehicles:read"
                         });
                 });
 
@@ -254,6 +258,11 @@ namespace MyAutoTrack.Modules.Users.Infrastructure.Database.Migrations
                         },
                         new
                         {
+                            PermissionCode = "vehicles:read",
+                            RoleName = "Member"
+                        },
+                        new
+                        {
                             PermissionCode = "users:read",
                             RoleName = "Administrator"
                         },
@@ -265,6 +274,11 @@ namespace MyAutoTrack.Modules.Users.Infrastructure.Database.Migrations
                         new
                         {
                             PermissionCode = "vehicles:update",
+                            RoleName = "Administrator"
+                        },
+                        new
+                        {
+                            PermissionCode = "vehicles:read",
                             RoleName = "Administrator"
                         });
                 });
