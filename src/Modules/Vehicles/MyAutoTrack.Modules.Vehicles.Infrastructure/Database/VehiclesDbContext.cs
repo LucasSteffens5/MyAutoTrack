@@ -23,6 +23,8 @@ public sealed class VehiclesDbContext(DbContextOptions<VehiclesDbContext> option
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.HasDefaultSchema(Schemas.Vehicles);
+        
+        modelBuilder.ApplyConfiguration(new OutboxMessageConfiguration()); 
 
         modelBuilder.ApplyConfiguration(new OutboxMessageConsumerConfiguration());
         modelBuilder.ApplyConfiguration(new InboxMessageConfiguration());
