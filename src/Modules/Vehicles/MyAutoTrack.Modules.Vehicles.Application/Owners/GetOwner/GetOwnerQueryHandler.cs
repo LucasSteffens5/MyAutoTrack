@@ -20,7 +20,7 @@ internal sealed class GetOwnerQueryHandler(IDbConnectionFactory dbConnectionFact
                  v.id AS {nameof(OwnerResponse.Id)},
                 v.name AS {nameof(OwnerResponse.Name)},
              FROM vehicles.owners o
-             WHERE v.id = @Id
+             WHERE v.id = @OwnerId
              """;
         
         OwnerResponse? owner = (await connection.QuerySingleOrDefaultAsync<OwnerResponse>(sql, request));

@@ -1,6 +1,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using MyAutoTrack.Common.Domain;
 using MyAutoTrack.Common.Presentation.Endpoints;
@@ -13,7 +14,7 @@ internal sealed class CreateVehicle : IEndpoint
 {
     public void MapEndpoint(IEndpointRouteBuilder app)
     {
-        app.MapPost("vehicles", async (Request request, ISender sender) =>
+        app.MapPost("vehicle", async ([FromBody] Request request, [FromServices] ISender sender) =>
             {
                 Result<Guid> result = await sender.Send(new CreateVehicleCommand(
                     request.Name,

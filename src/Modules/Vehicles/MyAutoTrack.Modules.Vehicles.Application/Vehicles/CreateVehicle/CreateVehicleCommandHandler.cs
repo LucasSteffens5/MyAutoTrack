@@ -38,6 +38,8 @@ internal sealed class CreateVehicleCommandHandler(
             request.Mileage,
             request.LicensePlate);
 
+        vehicleRepository.Insert(result.Value);
+        
         await unitOfWork.SaveChangesAsync(cancellationToken);
 
         return result.Value.Id;

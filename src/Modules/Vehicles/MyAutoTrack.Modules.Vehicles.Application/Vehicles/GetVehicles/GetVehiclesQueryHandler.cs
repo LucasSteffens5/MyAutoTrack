@@ -22,11 +22,10 @@ internal sealed class GetVehiclesQueryHandler (IDbConnectionFactory dbConnection
                  v.fabrication_year AS {nameof(VehiclesResponse.FabricationYear)},
                  v.mileage AS {nameof(VehiclesResponse.Mileage)},
                  v.license_plate AS {nameof(VehiclesResponse.LicensePlate)},
-                 v.license_plate AS {nameof(VehiclesResponse.OwnerId)},
                  v.owner_id AS {nameof(VehiclesResponse.OwnerId)},
                  v.Manufacturer_id AS {nameof(VehiclesResponse.ManufacturerId)}
              FROM vehicles.vehicles v
-             WHERE v.id = @Id
+             WHERE v.id = @VehicleId
              """;
 
         VehiclesResponse? vehicle = (await connection.QuerySingleOrDefaultAsync<VehiclesResponse>(sql, request));

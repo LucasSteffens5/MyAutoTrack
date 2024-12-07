@@ -21,7 +21,7 @@ internal sealed class GetManufacturerQueryHandler(IDbConnectionFactory dbConnect
                  m.id AS {nameof(ManufacturerResponse.Id)},
                  m.name AS {nameof(ManufacturerResponse.Name)}
              FROM vehicles.manufacturers m
-             WHERE m.id = @Id
+             WHERE m.id = @ManufactureId
              """;
 
         ManufacturerResponse? manufacturer =
