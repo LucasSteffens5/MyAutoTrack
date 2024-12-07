@@ -2,7 +2,7 @@ using FluentValidation;
 
 namespace MyAutoTrack.Modules.Vehicles.Application.Owners.CreateOwner;
 
-public class CreateOwnerValidator : AbstractValidator<CreateOwnerCommand>
+internal sealed class CreateOwnerValidator : AbstractValidator<CreateOwnerCommand>
 {
     public CreateOwnerValidator()
     {
