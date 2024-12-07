@@ -3,12 +3,12 @@ using MyAutoTrack.Common.Domain;
 using MyAutoTrack.Modules.Vehicles.Application.Abstractions.Data;
 using MyAutoTrack.Modules.Vehicles.Domain.Manufacturers;
 
-namespace MyAutoTrack.Modules.Vehicles.Application.Manufacturers.CreateManufacturers;
+namespace MyAutoTrack.Modules.Vehicles.Application.Manufacturers.CreateManufacturer;
 
-internal sealed class CreateManufacturersCommandHandler(IManufacturersRepository manufacturersRepository, IUnitOfWork unitOfWork)
-    : ICommandHandler<CreateManufacturersCommand, Guid>
+internal sealed class CreateManufacturerCommandHandler(IManufacturersRepository manufacturersRepository, IUnitOfWork unitOfWork)
+    : ICommandHandler<CreateManufacturerCommand, Guid>
 {
-    public async Task<Result<Guid>> Handle(CreateManufacturersCommand request, CancellationToken cancellationToken)
+    public async Task<Result<Guid>> Handle(CreateManufacturerCommand request, CancellationToken cancellationToken)
     {
         var manufacturer = Manufacturer.Create(request.Name);
 
