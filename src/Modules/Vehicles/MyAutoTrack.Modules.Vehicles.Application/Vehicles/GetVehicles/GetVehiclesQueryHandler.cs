@@ -33,7 +33,7 @@ internal sealed class GetVehiclesQueryHandler (IDbConnectionFactory dbConnection
         
         if (vehicle is null)
         {
-            return Result.Failure<VehiclesResponse>(VehiclesErrors.NotFound(request.Id));
+            return Result.Failure<VehiclesResponse>(VehiclesErrors.NotFound(request.VehicleId));
         }
 
         return vehicle;

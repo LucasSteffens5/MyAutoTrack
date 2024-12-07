@@ -9,6 +9,7 @@
     <ItemGroup>
       <ProjectReference Include="..\..\..\Common\MyAutoTrack.Common.Application\MyAutoTrack.Common.Application.csproj" />
       <ProjectReference Include="..\MyAutoTrack.Modules.Vehicles.Domain\MyAutoTrack.Modules.Vehicles.Domain.csproj" />
+      <ProjectReference Include="..\MyAutoTrack.Modules.Vehicles.IntegrationEvents\MyAutoTrack.Modules.Vehicles.IntegrationEvents.csproj" />
     </ItemGroup>
 
 </Project>
