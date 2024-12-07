@@ -25,7 +25,8 @@ builder.Services.AddSwaggerDocumentation();
 
 Assembly[] moduleApplicationAssemblies =
 [
-    MyAutoTrack.Modules.Users.Application.AssemblyReference.Assembly
+    MyAutoTrack.Modules.Users.Application.AssemblyReference.Assembly,
+    MyAutoTrack.Modules.Vehicles.Application.AssemblyReference.Assembly
 ];
 
 builder.Services.AddApplication(moduleApplicationAssemblies);
