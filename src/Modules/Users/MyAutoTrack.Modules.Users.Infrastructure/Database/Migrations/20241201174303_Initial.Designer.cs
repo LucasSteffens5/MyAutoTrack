@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MyAutoTrack.Modules.Users.Infrastructure.Database.Migrations
 {
     [DbContext(typeof(UsersDbContext))]
-    [Migration("20241122175744_Inbox_Migration")]
-    partial class Inbox_Migration
+    [Migration("20241201174303_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -152,6 +152,14 @@ namespace MyAutoTrack.Modules.Users.Infrastructure.Database.Migrations
                         new
                         {
                             Code = "users:update"
+                        },
+                        new
+                        {
+                            Code = "vehicles:update"
+                        },
+                        new
+                        {
+                            Code = "vehicles:read"
                         });
                 });
 
@@ -248,12 +256,32 @@ namespace MyAutoTrack.Modules.Users.Infrastructure.Database.Migrations
                         },
                         new
                         {
+                            PermissionCode = "vehicles:update",
+                            RoleName = "Member"
+                        },
+                        new
+                        {
+                            PermissionCode = "vehicles:read",
+                            RoleName = "Member"
+                        },
+                        new
+                        {
                             PermissionCode = "users:read",
                             RoleName = "Administrator"
                         },
                         new
                         {
                             PermissionCode = "users:update",
+                            RoleName = "Administrator"
+                        },
+                        new
+                        {
+                            PermissionCode = "vehicles:update",
+                            RoleName = "Administrator"
+                        },
+                        new
+                        {
+                            PermissionCode = "vehicles:read",
                             RoleName = "Administrator"
                         });
                 });

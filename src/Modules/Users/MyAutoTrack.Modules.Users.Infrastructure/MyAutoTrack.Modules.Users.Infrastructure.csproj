@@ -29,4 +29,11 @@
       <Folder Include="Database\Migrations\" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Compile Remove="Database\Migrations\20241127211950_Add-Modify-Vehicles-Permission.cs" />
+      <Compile Remove="Database\Migrations\20241127211950_Add-Modify-Vehicles-Permission.Designer.cs" />
+      <Compile Remove="Database\Migrations\20241127212850_Add-Permission-Modify-Vehicles.cs" />
+      <Compile Remove="Database\Migrations\20241127212850_Add-Permission-Modify-Vehicles.Designer.cs" />
+    </ItemGroup>
+
 </Project>

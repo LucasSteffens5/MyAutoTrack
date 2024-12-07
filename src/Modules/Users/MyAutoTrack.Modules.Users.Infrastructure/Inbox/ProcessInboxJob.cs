@@ -10,6 +10,7 @@ using MyAutoTrack.Common.Application.EventBus;
 using MyAutoTrack.Common.Infrastructure.Inbox;
 using MyAutoTrack.Common.Infrastructure.Serialization;
 using MyAutoTrack.Modules.Users.Application;
+using MyAutoTrack.Modules.Users.Presentation;
 using Newtonsoft.Json;
 using Quartz;
 
@@ -23,7 +24,7 @@ internal sealed class ProcessInboxJob(
     IOptions<InboxOptions> inboxOptions,
     ILogger<ProcessInboxJob> logger) : IJob
 {
-    private const string ModuleName = "Attendance";
+    private const string ModuleName = "Users";
 
     public async Task Execute(IJobExecutionContext context)
     {
@@ -49,7 +50,7 @@ internal sealed class ProcessInboxJob(
                 IEnumerable<IIntegrationEventHandler> handlers = IntegrationEventHandlersFactory.GetHandlers(
                     integrationEvent.GetType(),
                     scope.ServiceProvider,
-                    AssemblyReference.Assembly);
+                    PresentationUsersAssemblyReference.Assembly);
 
                 foreach (IIntegrationEventHandler integrationEventHandler in handlers)
                 {

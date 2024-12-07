@@ -3,30 +3,17 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace MyAutoTrack.Modules.Users.Infrastructure.Database.Migrations
+namespace MyAutoTrack.Modules.Vehicles.Infrastructure.Database.Migrations
 {
     /// <inheritdoc />
-    public partial class Inbox_Migration : Migration
+    public partial class AddOutboxtable : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "inbox_message_consumers",
-                schema: "users",
-                columns: table => new
-                {
-                    inbox_message_id = table.Column<Guid>(type: "uuid", nullable: false),
-                    name = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_inbox_message_consumers", x => new { x.inbox_message_id, x.name });
-                });
-
-            migrationBuilder.CreateTable(
-                name: "inbox_messages",
-                schema: "users",
+                name: "outbox_messages",
+                schema: "vehicles",
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -38,7 +25,7 @@ namespace MyAutoTrack.Modules.Users.Infrastructure.Database.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_inbox_messages", x => x.id);
+                    table.PrimaryKey("pk_outbox_messages", x => x.id);
                 });
         }
 
@@ -46,12 +33,8 @@ namespace MyAutoTrack.Modules.Users.Infrastructure.Database.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "inbox_message_consumers",
-                schema: "users");
-
-            migrationBuilder.DropTable(
-                name: "inbox_messages",
-                schema: "users");
+                name: "outbox_messages",
+                schema: "vehicles");
         }
     }
 }
