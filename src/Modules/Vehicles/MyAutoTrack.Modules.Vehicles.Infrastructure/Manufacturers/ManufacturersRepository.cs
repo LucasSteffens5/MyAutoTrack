@@ -14,4 +14,9 @@ public sealed class ManufacturersRepository(VehiclesDbContext context) : IManufa
     {
         context.Manufacturers.Add(manufacturer);
     }
+
+    public void Update(Manufacturer manufacturer)
+    {
+        context.Manufacturers.Update(manufacturer);
+    }
 }

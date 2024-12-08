@@ -14,4 +14,8 @@ internal sealed class VehicleRepository(VehiclesDbContext context) : IVehicleRep
     {
         context.Vehicles.Add(vehicle);
     }
+    public void Update(Vehicle vehicle)
+    {
+        context.Vehicles.Update(vehicle);
+    }
 }

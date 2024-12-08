@@ -14,4 +14,9 @@ public class OwnersRepository(VehiclesDbContext context) : IOwnersRepository
     {
         context.Owners.Add(owner);
     }
+    
+    public void Update(Owner owner)
+    {
+        context.Owners.Update(owner);
+    }
 }
