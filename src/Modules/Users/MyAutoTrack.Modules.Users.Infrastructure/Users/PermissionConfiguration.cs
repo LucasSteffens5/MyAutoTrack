@@ -18,7 +18,9 @@ internal sealed class PermissionConfiguration : IEntityTypeConfiguration<Permiss
             Permission.GetUser,
             Permission.ModifyUser,
             Permission.ModifyVehicles,
-            Permission.GetVehicles); // TODO Aqui adicioanr mais permissoes para outros modulos
+            Permission.GetVehicles,
+            Permission.GetMaintenance,
+            Permission.ModifyMaintenance); // TODO Aqui adicioanr mais permissoes para outros modulos
 
         builder
             .HasMany<Role>()
@@ -32,11 +34,15 @@ internal sealed class PermissionConfiguration : IEntityTypeConfiguration<Permiss
                     CreateRolePermission(Role.Member, Permission.GetUser),
                     CreateRolePermission(Role.Member, Permission.ModifyVehicles),
                     CreateRolePermission(Role.Member, Permission.GetVehicles),
+                    CreateRolePermission(Role.Member, Permission.GetMaintenance),
+                    CreateRolePermission(Role.Member, Permission.ModifyMaintenance),
                   
                     // Admin permissions
                     CreateRolePermission(Role.Administrator, Permission.GetUser), 
                     CreateRolePermission(Role.Administrator, Permission.ModifyUser),
                     CreateRolePermission(Role.Administrator, Permission.ModifyVehicles),
+                    CreateRolePermission(Role.Administrator, Permission.GetMaintenance),
+                    CreateRolePermission(Role.Administrator, Permission.ModifyMaintenance),
                     CreateRolePermission(Role.Administrator, Permission.GetVehicles) //TODO Aqui adicionar mais roles para outros modulos
                     );
             });
