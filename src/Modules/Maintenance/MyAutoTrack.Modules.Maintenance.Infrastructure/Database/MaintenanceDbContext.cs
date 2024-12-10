@@ -1,4 +1,6 @@
 using Microsoft.EntityFrameworkCore;
+using MyAutoTrack.Common.Infrastructure.Inbox;
+using MyAutoTrack.Common.Infrastructure.Outbox;
 using MyAutoTrack.Modules.Maintenance.Application.Abstractions.Data;
 using MyAutoTrack.Modules.Maintenance.Domain.Maintenances;
 using MyAutoTrack.Modules.Maintenance.Domain.Vehicles;
@@ -17,6 +19,12 @@ public class MaintenanceDbContext(DbContextOptions<MaintenanceDbContext> options
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.HasDefaultSchema(Schemas.Maintenance);
+        
+        modelBuilder.ApplyConfiguration(new OutboxMessageConfiguration()); 
+        modelBuilder.ApplyConfiguration(new OutboxMessageConsumerConfiguration());
+        modelBuilder.ApplyConfiguration(new InboxMessageConfiguration());
+        modelBuilder.ApplyConfiguration(new InboxMessageConsumerConfiguration());
+        
         modelBuilder.ApplyConfiguration(new VehicleConfiguration());
         modelBuilder.ApplyConfiguration(new MaintenanceConfiguration());
         modelBuilder.ApplyConfiguration(new MaintenanceItemConfiguration());
