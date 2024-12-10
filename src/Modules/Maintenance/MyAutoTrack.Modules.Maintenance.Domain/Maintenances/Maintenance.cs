@@ -1,6 +1,7 @@
 using MyAutoTrack.Common.Domain;
+using MyAutoTrack.Modules.Maintenance.Domain.Vehicles;
 
-namespace MyAutoTrack.Modules.Maintenance.Domain.Maintenance;
+namespace MyAutoTrack.Modules.Maintenance.Domain.Maintenances;
 
 public sealed class Maintenance : Entity
 {
@@ -18,4 +19,6 @@ public sealed class Maintenance : Entity
     public long Mileage { get; private set; }
     public string Description { get; private set; }
 
+    public ICollection<MaintenanceItem> MaintenanceItems { get; set; }
+    public Vehicle Vehicle { get; set; }
 }

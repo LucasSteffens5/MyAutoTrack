@@ -17,4 +17,6 @@ public sealed class Vehicle : Entity
     public string LicensePlate { get; private set; }
     public Guid OwnerId { get; private set; }
     public Guid ManufacturerId { get; private set; }
+    
+    public ICollection<Maintenances.Maintenance> Maintenances { get; set; }
 }

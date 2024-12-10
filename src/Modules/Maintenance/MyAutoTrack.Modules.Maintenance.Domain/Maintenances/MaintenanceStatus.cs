@@ -1,4 +1,4 @@
-namespace MyAutoTrack.Modules.Maintenance.Domain.Maintenance;
+namespace MyAutoTrack.Modules.Maintenance.Domain.Maintenances;
 
 public enum MaintenanceStatus
 {
