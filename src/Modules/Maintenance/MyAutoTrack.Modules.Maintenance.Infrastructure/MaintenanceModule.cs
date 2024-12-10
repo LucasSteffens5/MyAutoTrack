@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using MyAutoTrack.Common.Presentation.Endpoints;
 using MyAutoTrack.Modules.Maintenance.Application.Abstractions.Data;
 using MyAutoTrack.Modules.Maintenance.Infrastructure.Database;
+using MyAutoTrack.Modules.Maintenance.Infrastructure.Maintenances;
 using MyAutoTrack.Modules.Maintenance.Infrastructure.Vehicles;
 using MyAutoTrack.Modules.Maintenance.Presentation;
 
@@ -35,6 +36,9 @@ public static class MaintenanceModule
                 .UseSnakeCaseNamingConvention());
 
          services.AddScoped<IVehicleRepository, VehicleRepository>();
+         services.AddScoped<IMaintenanceRepository, MaintenanceRepository>();
+         services.AddScoped<IItemRepository, ItemRepository>();
+         services.AddScoped<IMaintenanceItemRepository, MaintenanceItemRepository>();
         
         services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<MaintenanceDbContext>());
         
