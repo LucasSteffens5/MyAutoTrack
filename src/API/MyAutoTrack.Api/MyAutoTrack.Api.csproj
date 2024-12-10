@@ -24,6 +24,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Common\MyAutoTrack.Common.Infrastructure\MyAutoTrack.Common.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Modules\Maintenance\MyAutoTrack.Modules.Maintenance.Infrastructure\MyAutoTrack.Modules.Maintenance.Infrastructure.csproj" />
     <ProjectReference Include="..\..\Modules\Users\MyAutoTrack.Modules.Users.Infrastructure\MyAutoTrack.Modules.Users.Infrastructure.csproj" />
   </ItemGroup>
 

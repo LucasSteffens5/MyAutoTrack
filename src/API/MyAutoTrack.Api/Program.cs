@@ -9,6 +9,7 @@ using MyAutoTrack.Common.Infrastructure;
 using MyAutoTrack.Common.Infrastructure.Configuration;
 using MyAutoTrack.Common.Infrastructure.EventBus;
 using MyAutoTrack.Common.Presentation.Endpoints;
+using MyAutoTrack.Modules.Maintenance.Infrastructure;
 using MyAutoTrack.Modules.Users.Infrastructure;
 using MyAutoTrack.Modules.Vehicles.Infrastructure;
 using Serilog;
@@ -53,12 +54,14 @@ builder.Services.AddHealthChecks()
 
 builder.Configuration
     .AddModuleConfiguration([
-        "users", "vehicles"
+        "users", "vehicles", "maintenance"
     ]); // TODO: Adicionar as configurações dos modulos conforme for desenvolvendo
 
 builder.Services.AddUsersModule(builder.Configuration);
 
-builder.Services.AddVehiclesModule(builder.Configuration); // TODO: Adicionar os modulos conforme for desenvolvendo
+builder.Services.AddVehiclesModule(builder.Configuration);
+
+builder.Services.AddMaintenanceModule(builder.Configuration); // TODO: Adicionar os modulos conforme for desenvolvendo
 
 WebApplication app = builder.Build();
 

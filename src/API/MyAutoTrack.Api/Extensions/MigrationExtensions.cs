@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MyAutoTrack.Modules.Maintenance.Infrastructure.Database;
 using MyAutoTrack.Modules.Users.Infrastructure.Database;
 using MyAutoTrack.Modules.Vehicles.Infrastructure.Database;
 
@@ -12,6 +13,7 @@ public static class MigrationExtensions
 
         ApplyMigration<UsersDbContext>(scope); 
         ApplyMigration<VehiclesDbContext>(scope);
+        ApplyMigration<MaintenanceDbContext>(scope);
         // TODO: Aqui adionar outros db contexts dos modulos a serem desenvolvidos
     }
 
