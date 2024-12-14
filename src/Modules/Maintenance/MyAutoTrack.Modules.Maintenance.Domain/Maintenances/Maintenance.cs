@@ -7,7 +7,6 @@ public sealed class Maintenance : Entity
 {
     private Maintenance()
     {
-        
     }
 
     public Guid Id { get; set; }
@@ -21,4 +20,21 @@ public sealed class Maintenance : Entity
 
     public ICollection<MaintenanceItem> MaintenanceItems { get; set; }
     public Vehicle Vehicle { get; set; }
+
+    public static Maintenance Create(Vehicle Vehicle, Guid VehicleId, MaintenanceStatus Status, long Mileage,
+        decimal TotalPrice, string Description, IList<MaintenanceItem> MaintenanceItems)
+    {
+        return new Maintenance
+        {
+            Id = Guid.NewGuid(),
+            Vehicle = Vehicle,
+            VehicleId = VehicleId,
+            Status = Status,
+            Mileage = Mileage,
+            TotalPrice = TotalPrice,
+            Description = Description,
+            StartsAtUtc = DateTime.UtcNow,
+            MaintenanceItems = MaintenanceItems
+        };
+    }
 }
