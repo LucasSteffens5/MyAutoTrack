@@ -27,8 +27,9 @@ builder.Services.AddSwaggerDocumentation();
 Assembly[] moduleApplicationAssemblies =
 [
     MyAutoTrack.Modules.Users.Application.AssemblyReference.Assembly,
-    MyAutoTrack.Modules.Vehicles.Application.AssemblyReference.Assembly
-];
+    MyAutoTrack.Modules.Vehicles.Application.AssemblyReference.Assembly,
+    MyAutoTrack.Modules.Maintenance.Application.AssemblyReference.Assembly,
+]; // TODO: Sempre adicionar a referencia a um novo modulo aqui para camada de aplicação
 
 builder.Services.AddApplication(moduleApplicationAssemblies);
 
