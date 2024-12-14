@@ -1,4 +1,4 @@
-namespace MyAutoTrack.Modules.Maintenance.Infrastructure.Maintenances;
+namespace MyAutoTrack.Modules.Maintenance.Domain.Maintenances;
 
 public interface IMaintenanceRepository
 {

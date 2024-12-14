@@ -1,6 +1,4 @@
-using MyAutoTrack.Modules.Maintenance.Domain.Maintenances;
-
-namespace MyAutoTrack.Modules.Maintenance.Infrastructure.Maintenances;
+namespace MyAutoTrack.Modules.Maintenance.Domain.Maintenances;
 
 public interface IItemRepository
 {
