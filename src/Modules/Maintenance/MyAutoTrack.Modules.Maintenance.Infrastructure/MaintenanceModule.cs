@@ -5,7 +5,9 @@ using Microsoft.Extensions.DependencyInjection;
 using MyAutoTrack.Common.Presentation.Endpoints;
 using MyAutoTrack.Modules.Maintenance.Application.Abstractions.Data;
 using MyAutoTrack.Modules.Maintenance.Infrastructure.Database;
+using MyAutoTrack.Modules.Maintenance.Infrastructure.Inbox;
 using MyAutoTrack.Modules.Maintenance.Infrastructure.Maintenances;
+using MyAutoTrack.Modules.Maintenance.Infrastructure.Outbox;
 using MyAutoTrack.Modules.Maintenance.Infrastructure.Vehicles;
 using MyAutoTrack.Modules.Maintenance.Presentation;
 
@@ -42,11 +44,11 @@ public static class MaintenanceModule
         
         services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<MaintenanceDbContext>());
         
-        // services.Configure<OutboxOptions>(configuration.GetSection("Maintenance:Outbox"));
-        // services.ConfigureOptions<ConfigureProcessOutboxJob>();
-        //
-        // services.Configure<InboxOptions>(configuration.GetSection("Maintenance:Inbox"));
-        //
-        // services.ConfigureOptions<ConfigureProcessInboxJob>();
+        services.Configure<OutboxOptions>(configuration.GetSection("Maintenance:Outbox"));
+        services.ConfigureOptions<ConfigureProcessOutboxJob>();
+        
+        services.Configure<InboxOptions>(configuration.GetSection("Maintenance:Inbox"));
+        
+        services.ConfigureOptions<ConfigureProcessInboxJob>();
     }
 }
