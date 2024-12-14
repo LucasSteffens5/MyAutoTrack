@@ -8,6 +8,7 @@ using MyAutoTrack.Common.Application.Messaging;
 using MyAutoTrack.Common.Presentation.Endpoints;
 using MyAutoTrack.Modules.Maintenance.Application;
 using MyAutoTrack.Modules.Maintenance.Application.Abstractions.Data;
+using MyAutoTrack.Modules.Maintenance.Domain.Maintenances;
 using MyAutoTrack.Modules.Maintenance.Infrastructure.Database;
 using MyAutoTrack.Modules.Maintenance.Infrastructure.Inbox;
 using MyAutoTrack.Modules.Maintenance.Infrastructure.Maintenances;

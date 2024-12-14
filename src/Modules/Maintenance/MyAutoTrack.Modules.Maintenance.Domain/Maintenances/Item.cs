@@ -15,4 +15,17 @@ public sealed class Item : Entity
     public long Inventory { get; set; }
     
     public ICollection<MaintenanceItem> MaintenanceItems { get; set; }
+
+    public static Item Create(string requestName, string requestType, decimal requestPrice, long requestInventory)
+    {
+        var item = new Item
+        {
+            Name = requestName,
+            Type = requestType,
+            Price = requestPrice,
+            Inventory = requestInventory
+        };
+        
+        return item;
+    }
 }

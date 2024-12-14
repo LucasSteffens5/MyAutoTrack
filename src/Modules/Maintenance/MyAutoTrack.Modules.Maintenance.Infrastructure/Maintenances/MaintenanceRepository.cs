@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using MyAutoTrack.Modules.Maintenance.Domain.Maintenances;
 using MyAutoTrack.Modules.Maintenance.Infrastructure.Database;
 
 namespace MyAutoTrack.Modules.Maintenance.Infrastructure.Maintenances;
