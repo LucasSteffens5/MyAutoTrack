@@ -3,8 +3,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using MyAutoTrack.Common.Application.EventBus;
 using MyAutoTrack.Common.Application.Messaging;
 using MyAutoTrack.Common.Presentation.Endpoints;
+using MyAutoTrack.Modules.Vehicles.Application;
 using MyAutoTrack.Modules.Vehicles.Application.Abstractions.Data;
 using MyAutoTrack.Modules.Vehicles.Domain.Manufacturers;
 using MyAutoTrack.Modules.Vehicles.Domain.Owners;
@@ -26,6 +28,8 @@ public static class VehiclesModule
         IConfiguration configuration)
     {
         services.AddDomainEventHandlers();
+        
+        services.AddIntegrationEventHandlers();
 
         services.AddInfrastructure(configuration);
         
@@ -57,6 +61,30 @@ public static class VehiclesModule
         services.Configure<InboxOptions>(configuration.GetSection("Vehicles:Inbox"));
 
         services.ConfigureOptions<ConfigureProcessInboxJob>();
+    }
+    
+    private static void AddIntegrationEventHandlers(this IServiceCollection services)
+    {
+        Type[] integrationEventHandlers = AssemblyReference.Assembly
+            .GetTypes()
+            .Where(t => t.IsAssignableTo(typeof(IIntegrationEventHandler)))
+            .ToArray();
+
+        foreach (Type integrationEventHandler in integrationEventHandlers)
+        {
+            services.TryAddScoped(integrationEventHandler);
+
+            Type integrationEvent = integrationEventHandler
+                .GetInterfaces()
+                .Single(i => i.IsGenericType)
+                .GetGenericArguments()
+                .Single();
+
+            Type closedIdempotentHandler =
+                typeof(IdempotentIntegrationEventHandler<>).MakeGenericType(integrationEvent);
+
+            services.Decorate(integrationEventHandler, closedIdempotentHandler);
+        }
     }
     
     private static void AddDomainEventHandlers(this IServiceCollection services)
