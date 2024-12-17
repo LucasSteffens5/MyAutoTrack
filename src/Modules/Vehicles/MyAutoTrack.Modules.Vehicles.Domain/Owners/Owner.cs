@@ -6,19 +6,18 @@ public class Owner
 {
     private Owner()
     {
-        
     }
-    
+
     public Guid Id { get; private set; }
 
     public string Name { get; private set; }
-    
-    public static Owner Create(string name)
+
+    public static Owner Create(string name, Guid ownerId)
     {
         var owner = new Owner
         {
             Name = name,
-            Id = Guid.NewGuid()
+            Id = ownerId
         };
 
         return owner;

@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using MyAutoTrack.Common.Application.EventBus;
 using MyAutoTrack.Common.Application.Messaging;
+using MyAutoTrack.Common.Infrastructure.Outbox;
 using MyAutoTrack.Common.Presentation.Endpoints;
 using MyAutoTrack.Modules.Maintenance.Application;
 using MyAutoTrack.Modules.Maintenance.Application.Abstractions.Data;
@@ -42,7 +43,8 @@ public static class MaintenanceModule
                     configuration.GetConnectionString("Database"),
                     npgsqlOptions => npgsqlOptions
                         .MigrationsHistoryTable(HistoryRepository.DefaultTableName, Schemas.Maintenance))
-                .UseSnakeCaseNamingConvention());
+                .UseSnakeCaseNamingConvention()
+                .AddInterceptors(sp.GetRequiredService<InsertOutboxMessagesInterceptor>()));
 
          services.AddScoped<IVehicleRepository, VehicleRepository>();
          services.AddScoped<IMaintenanceRepository, MaintenanceRepository>();
@@ -84,7 +86,7 @@ public static class MaintenanceModule
     
     private static void AddIntegrationEventHandlers(this IServiceCollection services)
     {
-        Type[] integrationEventHandlers = AssemblyReference.Assembly
+        Type[] integrationEventHandlers = PresentationMaintenanceAssemblyReference.Assembly
             .GetTypes()
             .Where(t => t.IsAssignableTo(typeof(IIntegrationEventHandler)))
             .ToArray();

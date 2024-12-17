@@ -10,6 +10,7 @@ using MyAutoTrack.Common.Application.Messaging;
 using MyAutoTrack.Common.Domain;
 using MyAutoTrack.Common.Infrastructure.Outbox;
 using MyAutoTrack.Common.Infrastructure.Serialization;
+using MyAutoTrack.Modules.Users.Application;
 using MyAutoTrack.Modules.Users.Presentation;
 using Newtonsoft.Json;
 using Quartz;
@@ -50,7 +51,7 @@ internal sealed class ProcessOutboxJob(
                 IEnumerable<IDomainEventHandler> handlers = DomainEventHandlersFactory.GetHandlers(
                     domainEvent.GetType(),
                     scope.ServiceProvider,
-                    PresentationUsersAssemblyReference.Assembly);
+                    AssemblyReference.Assembly);
 
                 foreach (IDomainEventHandler domainEventHandler in handlers)
                 {

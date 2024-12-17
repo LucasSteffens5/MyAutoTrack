@@ -2,20 +2,28 @@
 
 namespace MyAutoTrack.Modules.Users.IntegrationEvents;
 
-public sealed class UserRegisteredIntegrationEvent(
-    Guid id,
-    DateTime occurredOnUtc,
-    Guid userId,
-    string email,
-    string firstName,
-    string lastName)
-    : IntegrationEvent(id, occurredOnUtc)
+public sealed class UserRegisteredIntegrationEvent : IntegrationEvent
 {
-    public Guid UserId { get; init; } = userId;
+    public UserRegisteredIntegrationEvent(
+        Guid id,
+        DateTime occurredOnUtc,
+        Guid userId,
+        string email,
+        string firstName,
+        string lastName)
+        : base(id, occurredOnUtc)
+    {
+        UserId = userId;
+        Email = email;
+        FirstName = firstName;
+        LastName = lastName;
+    }
 
-    public string Email { get; init; } = email;
+    public Guid UserId { get; init; }
 
-    public string FirstName { get; init; } = firstName;
+    public string Email { get; init; }
 
-    public string LastName { get; init; } = lastName;
+    public string FirstName { get; init; }
+
+    public string LastName { get; init; }
 }

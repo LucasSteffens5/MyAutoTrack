@@ -1,3 +1,4 @@
+using MassTransit;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.Extensions.Configuration;
@@ -5,7 +6,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using MyAutoTrack.Common.Application.EventBus;
 using MyAutoTrack.Common.Application.Messaging;
+using MyAutoTrack.Common.Infrastructure.Outbox;
 using MyAutoTrack.Common.Presentation.Endpoints;
+using MyAutoTrack.Modules.Users.IntegrationEvents;
 using MyAutoTrack.Modules.Vehicles.Application;
 using MyAutoTrack.Modules.Vehicles.Application.Abstractions.Data;
 using MyAutoTrack.Modules.Vehicles.Domain.Manufacturers;
@@ -46,7 +49,8 @@ public static class VehiclesModule
                     configuration.GetConnectionString("Database"),
                     npgsqlOptions => npgsqlOptions
                         .MigrationsHistoryTable(HistoryRepository.DefaultTableName, Schemas.Vehicles))
-                .UseSnakeCaseNamingConvention());
+                .UseSnakeCaseNamingConvention()
+                .AddInterceptors(sp.GetRequiredService<InsertOutboxMessagesInterceptor>()));
 
         services.AddScoped<IVehicleRepository, VehicleRepository>();
         services.AddScoped<IOwnersRepository, OwnersRepository>();
@@ -65,7 +69,7 @@ public static class VehiclesModule
     
     private static void AddIntegrationEventHandlers(this IServiceCollection services)
     {
-        Type[] integrationEventHandlers = AssemblyReference.Assembly
+        Type[] integrationEventHandlers = PresentationVehiclesAssemblyReference.Assembly
             .GetTypes()
             .Where(t => t.IsAssignableTo(typeof(IIntegrationEventHandler)))
             .ToArray();
@@ -108,5 +112,11 @@ public static class VehiclesModule
 
             services.Decorate(domainEventHandler, closedIdempotentHandler);
         }
+    }
+    
+    public static void ConfigureConsumers(IRegistrationConfigurator registrationConfigurator, string instanceId)
+    {
+        registrationConfigurator.AddConsumer<IntegrationEventConsumer<UserRegisteredIntegrationEvent>>()
+            .Endpoint(c => c.InstanceId = instanceId);
     }
 }

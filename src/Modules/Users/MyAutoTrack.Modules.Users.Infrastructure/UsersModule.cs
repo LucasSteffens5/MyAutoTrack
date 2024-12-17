@@ -84,7 +84,7 @@ public static class UsersModule
 
     private static void AddDomainEventHandlers(this IServiceCollection services)
     {
-        Type[] domainEventHandlers = Application.AssemblyReference.Assembly
+        Type[] domainEventHandlers = AssemblyReference.Assembly
             .GetTypes()
             .Where(t => t.IsAssignableTo(typeof(IDomainEventHandler)))
             .ToArray();
@@ -107,7 +107,7 @@ public static class UsersModule
 
     private static void AddIntegrationEventHandlers(this IServiceCollection services)
     {
-        Type[] integrationEventHandlers = AssemblyReference.Assembly
+        Type[] integrationEventHandlers = PresentationUsersAssemblyReference.Assembly
             .GetTypes()
             .Where(t => t.IsAssignableTo(typeof(IIntegrationEventHandler)))
             .ToArray();

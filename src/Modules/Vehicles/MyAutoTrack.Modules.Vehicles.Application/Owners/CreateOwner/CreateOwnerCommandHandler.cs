@@ -10,7 +10,7 @@ internal sealed class CreateOwnerCommandHandler(IOwnersRepository ownersReposito
 {
     public async Task<Result<Guid>> Handle(CreateOwnerCommand request, CancellationToken cancellationToken)
     {
-        var owner = Owner.Create(request.Name);
+        var owner = Owner.Create(request.Name, request.OwnerId);
 
         ownersRepository.Insert(owner);
         await unitOfWork.SaveChangesAsync(cancellationToken);

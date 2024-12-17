@@ -40,6 +40,7 @@ var rabbitMqSettings = new RabbitMqSettings(builder.Configuration.GetConnectionS
 builder.Services.AddInfrastructure(
     DiagnosticsConfig.ServiceName,
     [
+        VehiclesModule.ConfigureConsumers // TODO: Adicionar os consumers de cada modulo conforme for desenvolvendo
     ],
     rabbitMqSettings,
     databaseConnectionString,

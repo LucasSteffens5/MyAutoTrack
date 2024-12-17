@@ -27,6 +27,7 @@
     <ItemGroup>
       <ProjectReference Include="..\..\..\Common\MyAutoTrack.Common.Application\MyAutoTrack.Common.Application.csproj" />
       <ProjectReference Include="..\..\..\Common\MyAutoTrack.Common.Infrastructure\MyAutoTrack.Common.Infrastructure.csproj" />
+      <ProjectReference Include="..\..\Users\MyAutoTrack.Modules.Users.IntegrationEvents\MyAutoTrack.Modules.Users.IntegrationEvents.csproj" />
       <ProjectReference Include="..\MyAutoTrack.Modules.Vehicles.Application\MyAutoTrack.Modules.Vehicles.Application.csproj" />
       <ProjectReference Include="..\MyAutoTrack.Modules.Vehicles.Domain\MyAutoTrack.Modules.Vehicles.Domain.csproj" />
       <ProjectReference Include="..\MyAutoTrack.Modules.Vehicles.Presentation\MyAutoTrack.Modules.Vehicles.Presentation.csproj" />
